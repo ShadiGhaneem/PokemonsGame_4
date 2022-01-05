@@ -38,7 +38,6 @@ FONT = pygame.font.SysFont('Arial', 20, bold=True)
 
 graph = json.loads(
     graph_json, object_hook=lambda json_dict: SimpleNamespace(**json_dict))
-
 for n in graph.Nodes:
     x, y, _ = n.pos.split(',')
     n.pos = SimpleNamespace(x=float(x), y=float(y))
@@ -48,7 +47,6 @@ min_x = min(list(graph.Nodes), key=lambda n: n.pos.x).pos.x
 min_y = min(list(graph.Nodes), key=lambda n: n.pos.y).pos.y
 max_x = max(list(graph.Nodes), key=lambda n: n.pos.x).pos.x
 max_y = max(list(graph.Nodes), key=lambda n: n.pos.y).pos.y
-
 
 def scale(data, min_screen, max_screen, min_data, max_data):
     """
@@ -151,6 +149,19 @@ while client.is_running() == 'true':
 
     # refresh rate
     clock.tick(60)
+    d = dwgraph()
+    for n in graph.Nodes:
+        d.addNode(n.id,n.pos)
+    for e in graph.Edges:
+        d.addEdge(e.src,e.dest , e.w)
+    Dwg=DWA()
+    Dw.init(d)
+    ls=[]
+    for b in pokemons:
+        ls.append(b.pos)
+    ts=Dwg.Tsp(ls)
+    ts
+
 
     # choose next edge
     for agent in agents:
