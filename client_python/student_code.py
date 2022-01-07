@@ -11,6 +11,9 @@ import pygame
 from pygame import *
 
 # init pygame
+from client_python.DWGraph import DWGraph
+from client_python.GraphAlgo import GraphAlgo
+
 WIDTH, HEIGHT = 1080, 720
 
 # default port
@@ -42,7 +45,7 @@ for n in graph.Nodes:
     x, y, _ = n.pos.split(',')
     n.pos = SimpleNamespace(x=float(x), y=float(y))
 
- # get data proportions
+# get data proportions
 min_x = min(list(graph.Nodes), key=lambda n: n.pos.x).pos.x
 min_y = min(list(graph.Nodes), key=lambda n: n.pos.y).pos.y
 max_x = max(list(graph.Nodes), key=lambda n: n.pos.x).pos.x
@@ -58,7 +61,7 @@ def scale(data, min_screen, max_screen, min_data, max_data):
 
 # decorate scale with the correct values
 
-def my_scale(data, x=False, y=False):
+def my_scale(data,x=False, y=False):
     if x:
         return scale(data, 50, screen.get_width() - 50, min_x, max_x)
     if y:
@@ -149,19 +152,26 @@ while client.is_running() == 'true':
 
     # refresh rate
     clock.tick(60)
-    d = dwgraph()
+    g = DWGraph()
     for n in graph.Nodes:
-        d.addNode(n.id,n.pos)
+        pos=[n.pos.x,n.pos.y]
+        g.add_node(n.id ,pos )
     for e in graph.Edges:
-        d.addEdge(e.src,e.dest , e.w)
-    Dwg=DWA()
-    Dw.init(d)
-    ls=[]
-    for b in pokemons:
-        ls.append(b.pos)
-    ts=Dwg.Tsp(ls)
-    ts
+        source = g.getNode(e.src)
+        destt = g.getNode(e.dest)
+        x1 = source.pos[0]
+        x2 = destt.pos[0]
+        y1 = source.pos[1]
+        y2 = destt.pos[1]
 
+        w = ((((x2 -x1)**2) + ((y2-y1)**2) )**0.5)
+        g.add_edge(e.src,e.dest,w)
+    g_algo = GraphAlgo()
+    g_algo.init(g)
+
+    lsPokemon = []
+    for e in agents:
+        lsPokemon.append(e.src)
 
     # choose next edge
     for agent in agents:
