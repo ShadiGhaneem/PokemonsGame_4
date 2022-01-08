@@ -17,7 +17,7 @@
 ### Design
 
 - Client_python folder : contains all the graph classes, e.g. edge data, node data, directed weighted graph, graph algorithms and so.
--  This section is responsible of creating graphs, edges and algorithms from graph theory such as shortest path and check whether the graph is connected by using Dijkstra-algorithm and BFS...
+-  This section is responsible of creating graphs, edges and algorithms from graph theory such as shortest path and check whether the graph is connected by using Dijkstra-algorithm ...
 -  We used the classes that we had Implemented in the previous assignmet (EX3).
 -  New Main classes : 
 -   They contains all the game planning and running, Pokemon and agent classes, GUI and more.
@@ -26,16 +26,11 @@ This part is responsible for running the game (automatically by algorithm) and t
     -  student_code.py : we use all the implementation and the Algorithms ...
 - and One secondry class:
     - Calc_Pos: this class we implement in order to find the edge fot each pokemon and the position would be calculated  by linear equation
-The game based of 2 parts -
 
 ### How to run?
  - In order to be able to use this project, you should have JDK 11 or above (not tetsted on older versions).
- - Simply clone this project to you computer and then import it to your favorite IDE (Eclipse, IntelliJ, etc..).
+ - Simply clone this project to you computer and then import it to your favorite IDE (pycharm..).
  - to run the game you can simply Click on the Ex4.jar, or run the Ex4.py file, either way, it depends on outside Server with would probably be dead in a month.
-
-### Tests:
-There are 2 JUNIT test (using JUNIT 5 version) :
-DWGraph_DSTest and DWGraph_AlgoTest.
 
 ### Ingame result footage
 
