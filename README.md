@@ -34,6 +34,8 @@ This part is responsible for running the game (automatically by algorithm) and t
 
 ### Ingame result footage
 
+![צילום מסך 2022-01-08 235245](https://user-images.githubusercontent.com/84326639/148661190-28f98261-f9a7-4606-aed3-de3715a8180e.png)
+
 ### Sources:
 - Assignment 1-3
 
