@@ -12,5 +12,18 @@ and we are implementing our UI that will draw graphs, Pokemons and Agents.
 - The game purpose : The agens are asked to collect the highest score by eating Pokemon when each has a different value. 
 
 
-###Ingame footage
+### Ingame footage
 
+
+
+
+### Design:
+The game based of 2 parts -
+api - contains all the graph classes, e.g. edge data, node data, directed weighted graph, graph algorithms and so. This section is responsible of creating graphs, edges and algorithms from graph theory such as shortest path and check whether the graph is connected by using Dijkstra-algorithm anf BFS.
+gameClient - contains all the game planning and running, Pokemon and agent classes, GUI and more.
+This part is responsible for running the game (automatically by algorithm) and the GUI.
+To run the game there is two options, by a jar file or by login with a login screen.
+
+### Tests:
+There are 2 JUNIT test (using JUNIT 5 version) :
+DWGraph_DSTest and DWGraph_AlgoTest.
