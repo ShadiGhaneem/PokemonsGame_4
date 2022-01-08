@@ -11,6 +11,7 @@ import pygame
 from pygame import *
 
 # init pygame
+from client_python.Calc_Pos import Calc_Pos
 from client_python.DWGraph import DWGraph
 from client_python.GraphAlgo import GraphAlgo
 
@@ -71,9 +72,9 @@ def my_scale(data,x=False, y=False):
 radius = 15
 
 client.add_agent("{\"id\":0}")
-# client.add_agent("{\"id\":1}")
-# client.add_agent("{\"id\":2}")
-# client.add_agent("{\"id\":3}")
+client.add_agent("{\"id\":1}")
+client.add_agent("{\"id\":2}")
+client.add_agent("{\"id\":3}")
 
 # this commnad starts the server - the game is running now
 client.start()
@@ -152,10 +153,15 @@ while client.is_running() == 'true':
 
     # refresh rate
     clock.tick(60)
+    # Here we init the our graph_algo that we had implemented in Ex3
     g = DWGraph()
     for n in graph.Nodes:
-        pos=[n.pos.x,n.pos.y]
-        g.add_node(n.id ,pos )
+        x = n.pos.x
+        y = n.pos.y
+        p = SimpleNamespace(x=my_scale(
+            float(x), x=True), y=my_scale(float(y), y=True))
+        pos = [p.x, p.y]
+        g.add_node(n.id ,pos)
     for e in graph.Edges:
         source = g.getNode(e.src)
         destt = g.getNode(e.dest)
@@ -169,16 +175,40 @@ while client.is_running() == 'true':
     g_algo = GraphAlgo()
     g_algo.init(g)
 
-    lsPokemon = []
-    for e in agents:
-        lsPokemon.append(e.src)
 
-    # choose next edge
+    # Here we find each pokemon edge and add the edge to the Edge_pokemon_list
+    Edge_Pokemon = []
+    c = Calc_Pos(g.get_all_edges(), g)
+    for p in pokemons:
+        Edge_Pokemon.append(c.get_line(p))
+    # Here we go over the edges that contains the pokemons and put there src and dest to the Path list
+    path=[]
+    for m in Edge_Pokemon:
+        if m is not None:
+            if path.__contains__(m.src.key) == False:
+                path.append(m.src.key)
+            if path.__contains__(m.dest.key) == False:
+                path.append(m.dest.key)
+
+    # choose next edge by going on the path list that we created above
     for agent in agents:
         if agent.dest == -1:
-            next_node = (agent.src - 1) % len(graph.Nodes)
-            client.choose_next_edge(
-                '{"agent_id":'+str(agent.id)+', "next_node_id":'+str(next_node)+'}')
+            short_path = []
+            short_path.append(agent.src)
+            for num in path:
+                ls_p = g_algo.shortest_path(short_path[len(short_path) - 1], num)[1]
+                if ls_p is not None:
+                    for n in ls_p:
+                        short_path.append(n)
+            if len(short_path)<2:
+                next_node = (agent.src-1) % len(graph.Nodes)
+                client.choose_next_edge(
+                    '{"agent_id":' + str(agent.id) + ', "next_node_id":' + str(next_node) + '}')
+            else:
+                for n in short_path:
+                    next_node =n
+                    client.choose_next_edge(
+                        '{"agent_id":'+str(agent.id)+', "next_node_id":'+str(next_node)+'}')
             ttl = client.time_to_end()
             print(ttl, client.get_info())
 
