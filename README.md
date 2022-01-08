@@ -3,7 +3,7 @@
 
 ### Task :
 
-- This assignment was based by a directed weighted graph with graph's algorithms.
+- This assignment was based by  directed weighted graph with graph's algorithms.
 -  We are asked to design a “Pokemon game” in which given a weighted graph,  a set of “Agents” should be located on it so they could “catch” as many “Pokemons” as possible and  implementing our UI that will draw graphs, Pokemons and Agents.
 
 - we implement a GameData structure that will communicate with the server, and make updates to the game.
