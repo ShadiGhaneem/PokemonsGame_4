@@ -13,11 +13,18 @@
 
 
 ### Design:
-The game based of 2 parts -
-api - contains all the graph classes, e.g. edge data, node data, directed weighted graph, graph algorithms and so. This section is responsible of creating graphs, edges and algorithms from graph theory such as shortest path and check whether the graph is connected by using Dijkstra-algorithm anf BFS.
-gameClient - contains all the game planning and running, Pokemon and agent classes, GUI and more.
+
+- Client_python folder : contains all the graph classes, e.g. edge data, node data, directed weighted graph, graph algorithms and so.
+-  This section is responsible of creating graphs, edges and algorithms from graph theory such as shortest path and check whether the graph is connected by using Dijkstra-algorithm and BFS...
+-  We used the classes that we had Implemented in the previous assignmet (EX3).
+-  New Main classes : 
+-   They contains all the game planning and running, Pokemon and agent classes, GUI and more.
 This part is responsible for running the game (automatically by algorithm) and the GUI.
-To run the game there is two options, by a jar file or by login with a login screen.
+    -  client.py : Manges all the Networking with  the servers , and takes all the data  and the graph .
+    -  student_code.py : we use all the implementation and the Algorithms ...
+- and One secondry class:
+ - Calc_Pos: this class we implement in order to find the edge fot each pokemon and the position would be calculated  by linear equation
+The game based of 2 parts -
 
 ### How to run?
  - In order to be able to use this project, you should have JDK 11 or above (not tetsted on older versions).
