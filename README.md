@@ -23,7 +23,7 @@ This part is responsible for running the game (automatically by algorithm) and t
     -  client.py : Manges all the Networking with  the servers , and takes all the data  and the graph .
     -  student_code.py : we use all the implementation and the Algorithms ...
 - and One secondry class:
- - Calc_Pos: this class we implement in order to find the edge fot each pokemon and the position would be calculated  by linear equation
+    - Calc_Pos: this class we implement in order to find the edge fot each pokemon and the position would be calculated  by linear equation
 The game based of 2 parts -
 
 ### How to run?
